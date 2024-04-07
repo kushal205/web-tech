@@ -25,7 +25,9 @@ export default function Navbar() {
           );
         })}
       </div>
-      <div className="pointer">logout</div>
+      <div className="pointer" onClick={() => router("/login")}>
+        logout
+      </div>
     </div>
   );
 }

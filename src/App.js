@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/pages/Login";
 import SportEdit from "./components/pages/SportEdit";
 import SportCreate from "./components/pages/SportsCreate";
+import { Toaster } from "react-hot-toast";
+import Provider from "./utils/context/Provider";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div>
-      <RouterProvider router={router} />
+      <Provider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </Provider>
     </div>
   );
 }

@@ -4,6 +4,10 @@ import SportCard from "../ui/card";
 import Navbar from "../ui/navbar";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import server from "../../utils/server";
+import { useContext, useEffect, useState } from "react";
+import { context } from "../../utils/context/Provider";
 
 const sports_details = [
   {
@@ -33,7 +37,22 @@ const sports_details = [
 ];
 
 export default function Home() {
+  const [sports, setSports] = useState([]);
   const router = useNavigate();
+  const store = useContext(context);
+
+  const getSports = async () => {
+    try {
+      const response = await server.get("/api/admin/sport");
+      setSports(response.data.data);
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
+  useEffect(() => {
+    getSports();
+  }, [store.data.refreshSport]);
   return (
     <Layout>
       <div className="search_container">
@@ -46,8 +65,8 @@ export default function Home() {
         </Button>
       </div>
       <div className="home_grid">
-        {sports_details.map((item) => {
-          return <SportCard title={item.title} details={item.details} />;
+        {sports.map((item) => {
+          return <SportCard {...item} store={store} />;
         })}
       </div>
     </Layout>

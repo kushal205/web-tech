@@ -9,18 +9,34 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import football from "../../../assets/football.jpg";
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import TransitionsModal from "../modal";
 
-export default function SportCard({ title, details }) {
+export default function SportCard({
+  name,
+  image,
+  description,
+  id,
+  location,
+  pitches,
+  store,
+}) {
+  //use states
+  const [modalOpen, setModalOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  //router
   const router = useNavigate();
 
+  //functions
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
+    store?.action.setSelectedSport(`${id}`);
     setAnchorEl(null);
+    setModalOpen(!modalOpen);
   };
 
   return (
@@ -38,7 +54,7 @@ export default function SportCard({ title, details }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
+        title={name}
       />
       <Menu
         id="basic-menu"
@@ -51,6 +67,7 @@ export default function SportCard({ title, details }) {
       >
         <MenuItem
           onClick={() => {
+            store?.action.setSelectedSport(`${id}`);
             router("/sportedit");
           }}
         >
@@ -61,14 +78,21 @@ export default function SportCard({ title, details }) {
       <CardMedia
         component="img"
         height="194"
-        image={football}
-        alt="Paella dish"
+        image={image}
+        alt={`image-${id}`}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {details}
+          Description: {description}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Pitches: {pitches}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Location: {location}
         </Typography>
       </CardContent>
+      <TransitionsModal open={modalOpen} setOpen={setModalOpen} />
     </Card>
   );
 }
