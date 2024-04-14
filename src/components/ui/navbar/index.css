@@ -1,0 +1,20 @@
+.navbar_container {
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  background: #e6e6e6;
+}
+.nav_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav_details_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.pointer {
+  cursor: pointer;
+}
