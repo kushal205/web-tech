@@ -45,108 +45,113 @@ export default function SportEdit() {
   }, [store.data.selectedSport]);
   return (
     <Layout>
-      <div className="form_container">
-        <div className="form_header">Update Sport Details</div>
-        <form className="form_flex">
-          <TextField
-            id="outlined-number"
-            label="Name"
-            placeholder="write name"
-            value={data.name}
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, name: e.target.value }))
-            }
-          />
-          <TextField
-            id="outlined-number"
-            label="Description"
-            placeholder="write description"
-            type="text"
-            value={data.description}
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, description: e.target.value }))
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            label="Image"
-            placeholder="add a URL"
-            type="text"
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, image: e.target.value }))
-            }
-            value={data.image}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            label="Pitches"
-            type="number"
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, pitches: e.target.valueAsNumber }))
-            }
-            value={data.pitches}
-            placeholder="number of pitches"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            label="Price"
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, price: e.target.valueAsNumber }))
-            }
-            placeholder="price for a pitch"
-            type="number"
-            value={data.price}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            label="Location"
-            type="text"
-            onChange={(e) =>
-              setData((prev) => ({ ...prev, location: e.target.value }))
-            }
-            placeholder="location"
-            value={data.location}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            label="Availability"
-            onChange={(e) =>
-              setData((prev) => ({
-                ...prev,
-                availability: e.target.valueAsNumber,
-              }))
-            }
-            type="number"
-            value={data.availability}
-            // todo: not clear about the field use
-            placeholder="availability"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <Button className="edit_button" onClick={updateSport}>
-            Update
-          </Button>
-        </form>
+      <div className="form-flex-center">
+        <div className="form_container">
+          <div className="form_header">Update Sport Details</div>
+          <form className="form_flex">
+            <TextField
+              id="outlined-number"
+              label="Name"
+              placeholder="write name"
+              value={data.name}
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, name: e.target.value }))
+              }
+            />
+            <TextField
+              id="outlined-number"
+              label="Description"
+              placeholder="write description"
+              type="text"
+              value={data.description}
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, description: e.target.value }))
+              }
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="Image"
+              placeholder="add a URL"
+              type="text"
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, image: e.target.value }))
+              }
+              value={data.image}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="Pitches"
+              type="number"
+              onChange={(e) =>
+                setData((prev) => ({
+                  ...prev,
+                  pitches: e.target.valueAsNumber,
+                }))
+              }
+              value={data.pitches}
+              placeholder="number of pitches"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="Price"
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, price: e.target.valueAsNumber }))
+              }
+              placeholder="price for a pitch"
+              type="number"
+              value={data.price}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="Location"
+              type="text"
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, location: e.target.value }))
+              }
+              placeholder="location"
+              value={data.location}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="Availability"
+              onChange={(e) =>
+                setData((prev) => ({
+                  ...prev,
+                  availability: e.target.valueAsNumber,
+                }))
+              }
+              type="number"
+              value={data.availability}
+              // todo: not clear about the field use
+              placeholder="availability"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <Button className="edit_button ani_button" onClick={updateSport}>
+              Update
+            </Button>
+          </form>
+        </div>
       </div>
     </Layout>
   );

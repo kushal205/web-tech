@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Copyright(props) {
   return (
@@ -46,7 +47,11 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    router("/");
+    if (data.get("email") === "admin" && data.get("password") === "admin123") {
+      router("/");
+    } else {
+      toast.error("Invalid credentials");
+    }
   };
 
   return (

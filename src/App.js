@@ -5,6 +5,7 @@ import SportEdit from "./components/pages/SportEdit";
 import SportCreate from "./components/pages/SportsCreate";
 import { Toaster } from "react-hot-toast";
 import Provider from "./utils/context/Provider";
+import Booking from "./components/pages/Booking";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/createsport",
     element: <SportCreate />,
+  },
+  {
+    path: "/booking",
+    element: <Booking />,
   },
 ]);
 

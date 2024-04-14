@@ -6,7 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import football from "../../../assets/football.jpg";
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TransitionsModal from "../modal";
@@ -19,6 +18,7 @@ export default function SportCard({
   location,
   pitches,
   store,
+  key,
 }) {
   //use states
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -36,11 +36,15 @@ export default function SportCard({
   const handleClose = () => {
     store?.action.setSelectedSport(`${id}`);
     setAnchorEl(null);
+  };
+  const handleCloseModal = () => {
+    store?.action.setSelectedSport(`${id}`);
+    setAnchorEl(null);
     setModalOpen(!modalOpen);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} key={key} className="card-animation">
       <CardHeader
         action={
           <IconButton
@@ -73,7 +77,7 @@ export default function SportCard({
         >
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleCloseModal}>Delete</MenuItem>
       </Menu>
       <CardMedia
         component="img"

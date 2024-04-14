@@ -1,10 +1,8 @@
 import { Button } from "@mui/material";
 import Layout from "../ui/Layout";
 import SportCard from "../ui/card";
-import Navbar from "../ui/navbar";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import server from "../../utils/server";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../../utils/context/Provider";
@@ -38,6 +36,7 @@ const sports_details = [
 
 export default function Home() {
   const [sports, setSports] = useState([]);
+  const [filteredSports, setFilteredSports] = useState([]);
   const router = useNavigate();
   const store = useContext(context);
 
@@ -45,9 +44,20 @@ export default function Home() {
     try {
       const response = await server.get("/api/admin/sport");
       setSports(response.data.data);
+      setFilteredSports(response.data.data);
     } catch (err) {
       console.log("error", err);
     }
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    //copy sports
+    const filtered = sports.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
+    console.log(filtered);
+    setFilteredSports(filtered);
   };
 
   useEffect(() => {
@@ -56,17 +66,22 @@ export default function Home() {
   return (
     <Layout>
       <div className="search_container">
-        <input type="text" placeholder="Search..." className="search_input" />
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search_input"
+          onChange={handleSearch}
+        />
         <Button
-          className="edit_button create_button"
+          className="edit_button create_button ani_button"
           onClick={() => router("createsport")}
         >
           create sport
         </Button>
       </div>
       <div className="home_grid">
-        {sports.map((item) => {
-          return <SportCard {...item} store={store} />;
+        {filteredSports.map((item, index) => {
+          return <SportCard {...item} store={store} key={`sport-${index}`} />;
         })}
       </div>
     </Layout>
