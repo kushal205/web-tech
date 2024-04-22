@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.layout_container {
+  background-image: radial-gradient(white, var(--secondary-color));
+  min-height: 100dvh;
+}

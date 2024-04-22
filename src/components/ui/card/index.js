@@ -8,22 +8,43 @@ import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import TransitionsModal from "../modal";
 
-export default function SportCard({ title, details,image }) {
+export default function SportCard({
+  name,
+  image,
+  description,
+  id,
+  location,
+  pitches,
+  store,
+  key,
+}) {
+  //use states
+  const [modalOpen, setModalOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  //router
   const router = useNavigate();
 
+  //functions
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
+    store?.action.setSelectedSport(`${id}`);
     setAnchorEl(null);
+  };
+  const handleCloseModal = () => {
+    store?.action.setSelectedSport(`${id}`);
+    setAnchorEl(null);
+    setModalOpen(!modalOpen);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} key={key} className="card-animation">
       <CardHeader
         action={
           <IconButton
@@ -37,7 +58,7 @@ export default function SportCard({ title, details,image }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
+        title={name}
       />
       <Menu
         id="basic-menu"
@@ -50,24 +71,32 @@ export default function SportCard({ title, details,image }) {
       >
         <MenuItem
           onClick={() => {
+            store?.action.setSelectedSport(`${id}`);
             router("/sportedit");
           }}
         >
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleCloseModal}>Delete</MenuItem>
       </Menu>
       <CardMedia
         component="img"
         height="194"
         image={image}
-        alt="Paella dish"
+        alt={`image-${id}`}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {details}
+          Description: {description}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Pitches: {pitches}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Location: {location}
         </Typography>
       </CardContent>
+      <TransitionsModal open={modalOpen} setOpen={setModalOpen} />
     </Card>
   );
 }

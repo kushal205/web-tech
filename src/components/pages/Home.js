@@ -1,58 +1,63 @@
 import { Button } from "@mui/material";
 import Layout from "../ui/Layout";
 import SportCard from "../ui/card";
-import Navbar from "../ui/navbar";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
-import football from '../../assets/football.jpg'
+import server from "../../utils/server";
+import { useContext, useEffect, useState } from "react";
+import { context } from "../../utils/context/Provider";
 
-const sports_details = [
-  {
-    title: "Cricket",
-    details: "details about the game",
-    img : "https://cdn.pixabay.com/photo/2015/04/15/21/06/cricket-724615_1280.jpg"
-  },
-  {
-    title: "Badminton",
-    details: "details about the game",
-    img : football
-  },
-  {
-    title: "Football",
-    details: "details about the game",
-    img : football
-  },
-  {
-    title: "Swimming",
-    details: "details about the game",
-    img : football
-  },
-  {
-    title: "Tennis",
-    details: "details about the game",img : football
-  },
-  {
-    title: "Boardgames",
-    details: "details about the game",img : football
-  },
-];
+
 
 export default function Home() {
+  const [sports, setSports] = useState([]);
+  const [filteredSports, setFilteredSports] = useState([]);
   const router = useNavigate();
+  const store = useContext(context);
+
+  const getSports = async () => {
+    try {
+      const response = await server.get("/api/admin/sport");
+      setSports(response.data.data);
+      setFilteredSports(response.data.data);
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    //copy sports
+    const filtered = sports.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
+    console.log(filtered);
+    setFilteredSports(filtered);
+  };
+
+  useEffect(() => {
+    getSports();
+  }, [store.data.refreshSport]);
   return (
     <Layout>
       <div className="search_container">
-        <input type="text" placeholder="Search..." className="search_input" />
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search_input"
+          onChange={handleSearch}
+        />
         <Button
-          className="edit_button create_button"
+          className="edit_button create_button ani_button"
           onClick={() => router("createsport")}
         >
           create sport
         </Button>
       </div>
       <div className="home_grid">
-        {sports_details.map((item) => {
-          return <SportCard title={item.title} details={item.details} image={item.img} />;
+      
+        {filteredSports.map((item, index) => {
+          return <SportCard {...item} store={store} key={`sport-${index}`} />;
         })}
       </div>
     </Layout>

@@ -3,6 +3,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: 2rem;
+  place-content: center;
+  max-width: 1200px;
+  margin-inline: auto;
 }
 
 .form_container {
@@ -11,7 +14,10 @@
   align-items: center;
   flex-direction: column;
   max-width: 600px;
+  border-radius: 8px;
   margin-inline: auto;
+  background-color: white;
+  padding: 0 0 2rem 0;
 }
 
 .form_header {
@@ -27,8 +33,23 @@
   width: 80%;
 }
 .edit_button {
-  background-color: #000 !important;
+  background-color: var(--primary-color) !important;
   color: white !important;
+  text-transform: capitalize !important;
+}
+@keyframes button {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.ani_button:hover {
+  animation: button 0.5s ease;
 }
 
 .search_container {
@@ -37,20 +58,26 @@
   align-items: center;
   gap: 1rem;
   padding: 2rem;
+  max-width: 1000px;
+  margin-inline: auto;
 }
 .search_input {
   flex-basis: 75%;
 
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 1rem;
   outline: none;
-  border: 1px solid gray;
+  border: 2px solid var(--secondary-color);
 }
 .search_input:focus {
   border: 2px solid skyblue;
 }
 .create_button {
-  flex-basis: 25%;
+  flex-basis: min(200px, 25%);
+}
+
+.form-flex-center {
+  padding: 4rem;
 }
 
 @media screen and (max-width: 640px) {

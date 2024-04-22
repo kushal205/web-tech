@@ -1,21 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import logo from "../../../assets/logo-tech.png";
 
 const navbar_header = [
-  { name: "home", route: "/" },
-  { name: "about" },
-  { name: "contact us" },
+  { name: "Home", route: "/" },
+  { name: "Booking", route: "/booking" },
 ];
 export default function Navbar() {
   const router = useNavigate();
   return (
     <div className="navbar_container nav_flex">
-      <div>logo</div>
+      <div className="pointer" onClick={() => router("/")}>
+        <img src={logo} height={40} />
+      </div>
       <div className="nav_details_flex">
         {navbar_header.map((item) => {
           return (
             <div
-              className="pointer"
+              className="pointer ani_button"
               onClick={() => {
                 if (item.route) router(item.route);
               }}
@@ -25,7 +27,12 @@ export default function Navbar() {
           );
         })}
       </div>
-      <div className="pointer">logout</div>
+      <div
+        className="pointer logout ani_button"
+        onClick={() => router("/login")}
+      >
+        Logout
+      </div>
     </div>
   );
 }
