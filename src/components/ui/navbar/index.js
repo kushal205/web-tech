@@ -31,7 +31,7 @@ export default function Navbar() {
         className="pointer logout ani_button"
         onClick={() => router("/login")}
       >
-        logout
+        Logout
       </div>
     </div>
   );

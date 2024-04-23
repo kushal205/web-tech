@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import logo from "../../assets/logo-tech.png"
 
 function Copyright(props) {
   return (
@@ -66,9 +67,10 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
+          <img src={logo} height={100} style={{backgroundColor:'black', padding:'1rem'}}/>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -83,7 +85,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Username"
               name="email"
               autoComplete="email"
               autoFocus

@@ -3,8 +3,12 @@ import Layout from "../ui/Layout";
 import { useState } from "react";
 import server from "../../utils/server";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+// import { Router } from "react-router-dom";
+
 
 export default function SportCreate() {
+  const router = useNavigate();
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -20,6 +24,7 @@ export default function SportCreate() {
       const response = await server.post("/api/admin/sport", data);
       console.log("response data ", response.data);
       toast.success(response.data.message);
+      router("/")
     } catch (err) {
       console.log("error", err);
       toast.error(err.message || "Error!");

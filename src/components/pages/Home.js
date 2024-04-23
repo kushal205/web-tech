@@ -7,32 +7,7 @@ import server from "../../utils/server";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../../utils/context/Provider";
 
-const sports_details = [
-  {
-    title: "Cricket",
-    details: "details about the game",
-  },
-  {
-    title: "Badminton",
-    details: "details about the game",
-  },
-  {
-    title: "Football",
-    details: "details about the game",
-  },
-  {
-    title: "Swimming",
-    details: "details about the game",
-  },
-  {
-    title: "Tennis",
-    details: "details about the game",
-  },
-  {
-    title: "Boardgames",
-    details: "details about the game",
-  },
-];
+
 
 export default function Home() {
   const [sports, setSports] = useState([]);
@@ -80,6 +55,7 @@ export default function Home() {
         </Button>
       </div>
       <div className="home_grid">
+      
         {filteredSports.map((item, index) => {
           return <SportCard {...item} store={store} key={`sport-${index}`} />;
         })}

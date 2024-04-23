@@ -4,8 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { context } from "../../utils/context/Provider";
 import server from "../../utils/server";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function SportEdit() {
+  const router = useNavigate();
   //state
   const [data, setData] = useState({
     name: "",
@@ -34,6 +36,7 @@ export default function SportEdit() {
     try {
       const response = await server.put("/api/admin/sport", data);
       toast.success(response.data.message);
+      router("/")
     } catch (err) {
       console.log("error", err);
       toast.error(err.message || "Error!");
