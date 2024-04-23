@@ -79,6 +79,20 @@
 .form-flex-center {
   padding: 4rem;
 }
+.booking_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.booking_title {
+  text-align: center;
+}
+
+.list_image {
+  width: 60px;
+}
 
 @media screen and (max-width: 640px) {
   .form_flex {
