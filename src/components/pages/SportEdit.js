@@ -24,7 +24,7 @@ export default function SportEdit() {
   const getSportById = async () => {
     try {
       const res = await server.get(
-        `api/admin/sport/${store.data.selectedSport}`
+        `api/admin/sport/${store.data.selectedSport}`,
       );
       setData(res.data.data);
     } catch (err) {
@@ -36,7 +36,7 @@ export default function SportEdit() {
     try {
       const response = await server.put("/api/admin/sport", data);
       toast.success(response.data.message);
-      router("/")
+      router("/");
     } catch (err) {
       console.log("error", err);
       toast.error(err.message || "Error!");
